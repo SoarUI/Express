@@ -11,38 +11,45 @@ res.send({
     status:0
 });
 }
-const getuserlist = async(req,res,next)=>{
-    let result= await UserModel.userlist();
-    if(result){
-        res.send({
-            msg:'获取用户列表成功',
-            status:0,
-            data:{
-                userlist:result
+const getuserlist = (req,res,next)=>{
+    UserModel.userlist().then(
+        result=>{
+            if(result){
+                res.send({
+                    msg:'获取用户列表成功',
+                    status:0,
+                    data:{
+                        userlist:result
+                    }
+                });
+            }else{
+                res.send({
+                    msg:'获取用户列表失败',
+                    status:-1,
+                });
             }
-        });
-    }else{
-        res.send({
-            msg:'获取用户列表失败',
-            status:-1,
-        });
-    }
+        }
+    );
+    
 }
-const freeze = async (req,res,next)=>{
-    let result = UserModel.freeze(req.body.email,req.body.isfreeze);
-    if(result){
-        res.send({
-            msg:'冻结操作成功',
-            status:0
-        });
-    }else{
-        res.send({
-            msg:'冻结操作失败',
-            status:-1,
-        });
-    }
+const freeze = (req,res,next)=>{
+     UserModel.freeze(req.body.email,req.body.isfreeze).then(
+        result=>{
+                if(result){
+                    res.send({
+                        msg:'冻结操作成功',
+                        status:0
+                    });
+                }else{
+                    res.send({
+                        msg:'冻结操作失败',
+                        status:-1,
+                    });
+                }
+            }
+    );
 }
-const upload= async (req,res,next)=>{
+const upload= (req,res,next)=>{
     /*
     名字：originalname
     destination:public/uploads/

@@ -37,11 +37,11 @@ const save =async (data)=>{
 }
 //接口--查找用户
 const findlogin=async (data)=>{
-    return UserModel.findOne(data);
+    return await UserModel.findOne(data);
 }
 //接口-更新用户信息
 const UpdatePassword= async (email,password)=>{
-    return UserModel.update({email},{$set:{password}})
+    return await UserModel.update({email},{$set:{password}})
 }
 //获取用户列表
 const userlist =async()=>{
@@ -49,11 +49,11 @@ const userlist =async()=>{
 }
 //冻结操作
 const freeze =async (email,isfree)=>{
-    return UserModel.update({email},{$set:{isfreeze:isfree}});
+    return await UserModel.update({email},{$set:{isfreeze:isfree}});
 }
 //更新图像
 const updateIcon =async (username,icon)=>{
-    return UserModel.update({username},{$set:{icon}});
+    return await UserModel.update({username},{$set:{icon}});
 }
 /*******************************
  * 页面接口
