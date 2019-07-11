@@ -17,13 +17,8 @@ var StragiesSchema = new mongoose.Schema({
     lastedit:{type:Date,default:Date.now}
 });
 var StragiesModel;
-if (mongoose.connection.models['stragies']) {
-  StragiesModel = mongoose.connection.models['stragies'];
-} else {
-  StragiesModel = mongoose.model('stragies', StragiesSchema );
-  StragiesModel.createIndexes();
-  //查询是否已经有该键
- var res= autoinc.findone({"_tid":'stragiesautoid'});
+const checkIndex =async()=>{
+  let res= await autoinc.findone({"_tid":'stragiesautoid'});
    
       if(res){
         console.log('found data had been created!');
@@ -35,10 +30,14 @@ if (mongoose.connection.models['stragies']) {
               })
             
           }
-  
-  
-  
- 
+}
+if (mongoose.connection.models['stragies']) {
+  StragiesModel = mongoose.connection.models['stragies'];
+} else {
+  StragiesModel = mongoose.model('stragies', StragiesSchema );
+  StragiesModel.createIndexes();
+  //查询是否已经有该键
+  checkIndex();
   /**/
 }
 const save =async (data)=>{

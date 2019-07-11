@@ -22,7 +22,7 @@ var insertseq=async (data)=>{
     return await newid.save();
 }
 var findone= async (query)=>{
-  return await AutoIncDB.findOne(query);
+    return await AutoIncDB.findOne(query);
 }
 module.exports={
     getNextSeq,

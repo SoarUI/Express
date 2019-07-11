@@ -18,13 +18,8 @@ var GameSchema = new mongoose.Schema({
     
 });
 var GameModel;
-if (mongoose.connection.models['game']) {
-  GameModel = mongoose.connection.models['game'];
-} else {
-  GameModel = mongoose.model('game', GameSchema );
-  GameModel.createIndexes();
-  //查询是否已经有该键
-  let res= autoinc.findone({"_tid":'gameautoid'})
+const checkIndex =async()=>{
+  let res= await autoinc.findone({"_tid":'gameautoid'})
     if(res){
       ;
       }else{
@@ -33,7 +28,14 @@ if (mongoose.connection.models['game']) {
             })
            
           }
- 
+}
+if (mongoose.connection.models['game']) {
+  GameModel = mongoose.connection.models['game'];
+} else {
+  GameModel = mongoose.model('game', GameSchema );
+  GameModel.createIndexes();
+  //查询是否已经有该键
+  checkIndex();
   /**/
 }
 const save =async (data)=>{

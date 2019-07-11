@@ -40,8 +40,6 @@ var login= (req,res,next)=>{
 };
 const register= (req,res,next)=>{
 var {username,password,email,verify} =req.body;
-console.log(req.session.email);
-console.log(req.session.verify);
 if(email != req.session.email ||verify != req.session.verify){
   res.send({
     msg:"注册失败-验证码错误或邮箱不一致",

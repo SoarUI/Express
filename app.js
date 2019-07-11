@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var AdminRouter = require('./routes/admin');
 var gameRouter =require('./routes/game')
 var stragiesRouter=require('./routes/stragies')
+var CommentRouter=require('./routes/comment')
 var session = require('express-session')
 //var bodyParser = require('body-parser');
 
@@ -52,6 +53,10 @@ app.use('/api/admin',AdminRouter);
 app.use('/api/game',gameRouter);
 //攻略查询
 app.use('/api/stragies',stragiesRouter);
+//评论查询
+app.use('/api/comment',CommentRouter);
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
